@@ -149,7 +149,7 @@ const changeImg=(e:any)=>{
           <p>Choix du chiffre</p>
           <select className='cursor-pointer h-10 bg-amber-300 w-28 rounded-2xl px-1' onChange={(e)=> {changeImg(e)}}>
           {images.map((x,i)=>{
-            return <option key={i} className={`cursor-pointer ${i%2==1?'bg-white':'bg-amber-200'}`} value={i}>{i}</option>
+            return <option key={x[i][i]} className={`cursor-pointer ${i%2==1?'bg-white':'bg-amber-200'}`} value={i}>{i}</option>
           })}
         </select>
         </div>
@@ -165,7 +165,7 @@ const changeImg=(e:any)=>{
           {row.map((bit, j) => (
             <select className={`cursor-pointer m-2 rounded ${j%2==1?'bg-amber-300':'bg-indigo-300'}`} onChange={(e)=>changingWeight(e.target.value,i,j)} key={j}>
               {possibleWeights.map((w:number)=>{
-                return <option key={w} className='cursor-pointer' value={w}>{w}</option>
+                return <option key={bit} className='cursor-pointer' value={w}>{w}</option>
               })}
             </select>
           ))}
