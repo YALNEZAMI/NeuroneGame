@@ -107,9 +107,9 @@ function App() {
             {weights.map((row, i) => (
               <div className="flex" key={i}>
 
-                {row.map((bit, j) => (
+                {row.map((_, j) => (
                   <select
-                    key={`${i}-${j}-${bit}`}
+                    key={`${i}-${j}`}
                     className={`cursor-pointer m-2 rounded ${
                       j % 2 === 1 ? "bg-amber-300" : "bg-indigo-300"
                     }`}
