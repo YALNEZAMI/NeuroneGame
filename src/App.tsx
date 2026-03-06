@@ -3,23 +3,102 @@ import "./App.css";
 
 function App() {
   const images = [
-    [[1,1,1,1,1],[1,0,0,0,1],[1,0,0,0,1],[1,0,0,0,1],[1,1,1,1,1]], //0
-    [[0,0,1,0,0],[0,1,1,0,0],[0,0,1,0,0],[0,0,1,0,0],[0,1,1,1,0]], //1
-    [[1,1,1,1,1],[0,0,0,1,1],[0,0,1,0,0],[1,1,0,0,0],[1,1,1,1,1]], //2
-    [[1,1,1,1,1],[0,0,0,1,1],[0,1,1,1,1],[0,0,0,1,1],[1,1,1,1,1]], //3
-    [[1,0,0,1,0],[1,0,0,1,0],[1,1,1,1,1],[0,0,0,1,0],[0,0,0,1,0]], //4
-    [[1,1,1,1,1],[1,0,0,0,0],[1,1,1,1,1],[0,0,0,0,1],[1,1,1,1,1]], //5
-    [[1,1,1,1,1],[1,0,0,0,0],[1,1,1,1,1],[1,0,0,0,1],[1,1,1,1,1]], //6
-    [[1,1,1,1,1],[0,0,0,1,0],[0,0,1,0,0],[0,1,0,0,0],[1,0,0,0,0]], //7
-    [[1,1,1,1,1],[1,0,0,0,1],[1,1,1,1,1],[1,0,0,0,1],[1,1,1,1,1]], //8
-    [[1,1,1,1,1],[1,0,0,0,1],[1,1,1,1,1],[0,0,0,0,1],[1,1,1,1,1]]  //9
-  ];
+  // 0
+  [
+    [0,1,1,1,0],
+    [1,0,0,0,1],
+    [1,0,0,0,1],
+    [1,0,0,0,1],
+    [0,1,1,1,0]
+  ],
+
+  // 1
+  [
+    [0,0,1,0,0],
+    [0,1,1,0,0],
+    [1,0,1,0,0],
+    [0,0,1,0,0],
+    [0,1,1,1,0]
+  ],
+
+  // 2
+  [
+    [0,1,1,1,0],
+    [1,0,0,0,1],
+    [0,0,0,1,0],
+    [0,0,1,0,1],
+    [1,1,1,1,1]
+  ],
+
+  // 3
+  [
+    [1,1,1,1,0],
+    [0,0,0,0,1],
+    [0,1,1,1,0],
+    [0,0,0,0,1],
+    [1,1,1,1,0]
+  ],
+
+  // 4
+  [
+    [0,0,0,1,0],
+    [0,0,1,1,0],
+    [0,1,0,1,0],
+    [1,1,1,1,1],
+    [0,0,0,1,0]
+  ],
+
+  // 5
+  [
+    [1,1,1,1,1],
+    [1,0,0,0,0],
+    [1,1,1,1,0],
+    [0,0,0,0,1],
+    [1,1,1,1,0]
+  ],
+
+  // 6
+  [
+    [0,0,0,1,0],
+    [0,0,1,0,0],
+    [0,1,1,1,0],
+    [0,1,0,0,1],
+    [0,1,1,1,0]
+  ],
+
+  // 7
+  [
+    [1,1,1,1,1],
+    [0,0,0,0,1],
+    [0,0,1,1,0],
+    [0,0,1,0,0],
+    [0,1,0,0,0]
+  ],
+
+  // 8
+  [
+    [0,1,1,1,0],
+    [1,0,0,0,1],
+    [0,1,1,1,0],
+    [1,0,0,0,1],
+    [0,1,1,1,0]
+  ],
+
+  // 9
+  [
+    [0,1,1,1,0],
+    [1,0,0,1,0],
+    [0,1,1,1,0],
+    [0,0,0,1,0],
+    [0,1,1,0,0]
+  ]
+]
 
   const [weights, setWeights] = useState(
     Array.from({ length: 5 }, () => Array(5).fill(0))
   );
 
-  const [image, setImage] = useState(images[0]);
+  const [idxImage, setIdxImage] = useState(0);
   const [result, setResult] = useState(0);
   const [ref, setRef] = useState(0);
 
@@ -27,12 +106,12 @@ function App() {
 
   const isBigger = result >= ref;
 
-  const calc = (wts:any) => {
+  const calc = (wts:any,idx:number) => {
     let res = 0;
-
-    for (let i = 0; i < image.length; i++) {
-      for (let j = 0; j < image[0].length; j++) {
-        const pix = Number(image[i][j]);
+    
+    for (let i = 0; i < images[idx].length; i++) {
+      for (let j = 0; j < images[idx][0].length; j++) {
+        const pix = Number(images[idx][i][j]);
         const w = Number(wts[i][j]);
         res += pix * w;
       }
@@ -46,13 +125,21 @@ function App() {
     tmp[i][j] = Number(value);
 
     setWeights(tmp);
-    setResult(calc(tmp));
+    setResult(calc(tmp,idxImage));
   };
 
   const changeImg = (e:any) => {
     const idx = Number(e.target.value);
-    setImage(images[idx]);
-    setResult(calc(weights));
+    setIdxImage(idx);
+    console.log("changeImg");
+    console.log("indx",idx);
+    console.log("wheight",weights);
+    
+    const res=calc(weights,idx)
+    console.log(res);
+    
+    setResult(res);
+
   };
 
   return (
@@ -61,7 +148,7 @@ function App() {
       {/* IMAGE */}
       <div className="flex justify-between bg-gray-100 p-10 m-3 rounded-3xl">
         <div>
-          {image.map((row, i) => (
+          {images[idxImage].map((row, i) => (
             <div className="flex" key={i}>
               {row.map((bit, j) => (
                 <div
