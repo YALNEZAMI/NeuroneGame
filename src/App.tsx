@@ -66,9 +66,10 @@ function App() {
               {row.map((bit, j) => (
                 <div
                   key={`${i}-${j}`}
-                  className={`w-5 h-5 ${
-                    bit === 1 ? "bg-amber-500" : "bg-gray-100"
-                  }`}
+                  className={`w-5 h-5
+                     ${bit === 1 ? "bg-amber-500" : "bg-gray-100"}
+                  ${i==0&&j==0?'rounded-tl-3xl':''} ${i==row.length-1&&j==row.length-1?'rounded-br-3xl':''} ${i==0&&j==row.length-1?'rounded-tr-3xl':''} ${i==row.length-1&&j==0?'rounded-bl-3xl':''}
+                  `}
                 />
               ))}
             </div>
