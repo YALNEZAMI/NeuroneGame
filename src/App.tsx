@@ -142,6 +142,13 @@ function App() {
 
   };
 
+  const changeRef= (e:any)=>{
+    setRef(Number(e.target.value));
+        setResult(calc(weights,idxImage));
+
+
+  }
+
   return (
     <main>
 
@@ -235,14 +242,14 @@ function App() {
             <input
               className="w-10 border-2 border-black rounded px-1 mx-1"
               type="number"
-              onChange={(e) => setRef(Number(e.target.value))}
+              onChange={(e) => changeRef(e)}
             />
 
           </div>
         </div>
 
         <div
-          className={`my-2 rounded-2xl ${
+          className={`my-10 rounded-2xl ${
             isBigger ? "bg-green-400" : "bg-red-400"
           }`}
         >
