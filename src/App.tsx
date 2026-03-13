@@ -253,7 +253,7 @@ function App() {
             isBigger ? "bg-green-400" : "bg-red-400"
           }`}
         >
-          Le résultat {isBigger ? "est" : "n'est pas"} supérieur ou égal à la
+          Le résultat est {isBigger ? "supérieur ou égal" : "inférieur"} à la
           référence
         </div>
 
