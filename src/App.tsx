@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
@@ -145,10 +145,13 @@ function App() {
   const changeRef= (e:any)=>{
     setRef(Number(e.target.value));
         setResult(calc(weights,idxImage));
-
-
   }
 
+  
+  useEffect(()=>{
+const reference=document.getElementById('reference') as HTMLInputElement
+reference.value=0;
+  })
   return (
     <main>
 
@@ -240,6 +243,7 @@ function App() {
             Référence:
 
             <input
+            id="reference"
               className="w-10 border-2 border-black rounded px-1 mx-1"
               type="number"
               onChange={(e) => changeRef(e)}
