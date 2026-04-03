@@ -149,12 +149,12 @@ function App() {
 
   
   useEffect(()=>{
-const reference=document.getElementById('reference') as HTMLInputElement
-reference.value="0";
-  })
+    const reference=document.getElementById('reference') as HTMLInputElement
+    reference.value="0";
+  });
+
   return (
     <main>
-
       {/* IMAGE */}
       <div className="flex justify-between bg-gray-100 p-10 m-3 rounded-3xl">
         <div>
