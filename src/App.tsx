@@ -150,7 +150,7 @@ function App() {
   
   useEffect(()=>{
 const reference=document.getElementById('reference') as HTMLInputElement
-reference.value=0;
+reference.value="0";
   })
   return (
     <main>
